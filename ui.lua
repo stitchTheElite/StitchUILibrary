@@ -13,6 +13,8 @@ function library:CreateWindow(name)
     local UIGridLayout = Instance.new("UIGridLayout")
     local TextLabel = Instance.new("TextLabel")
     local line = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local UICorner2 = Instance.new("UICorner")
     TextLabel.Parent = Main
     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TextLabel.BackgroundTransparency = 1.000
@@ -47,6 +49,10 @@ function library:CreateWindow(name)
     UIGridLayout.Parent = Container
     UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
+    UICorner.Parent = Main
+    UICorner.CornerRadius = UDim2.new(0, 6)
+    UICorner2.Parent = TextButton
+    UICorner2.CornerRadius = UDim2.new(0, 6)
     if game.Players.LocalPlayer.PlayerGui:FindFirstChild(name) then
         game.Players.LocalPlayer.PlayerGui[name]:Destroy()
     end
