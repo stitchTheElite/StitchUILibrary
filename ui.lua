@@ -56,7 +56,6 @@ function library:CreateWindow(name, draggable) -- library function
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
-    if draggable == true then
         local function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
             local dragSpeed = .25
             local dragToggle = nil
@@ -90,8 +89,9 @@ function library:CreateWindow(name, draggable) -- library function
                 end
             end)
         end
-        return dragify
-        dragify(game.Players.LocalPlayer.PlayerGui[name].Main)
+        if draggable == true then
+            dragify(game.Players.LocalPlayer.PlayerGui[name].Main)
+        end
 
     local button = {} -- button
     function button:CreateButton(text, textScaled) -- button function
