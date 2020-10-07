@@ -50,9 +50,6 @@ function library:CreateWindow(name)
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
-    if game.Players.LocalPlayer.PlayerGui:FindFirstChild(name) then
-        game.Players.LocalPlayer.PlayerGui[name]:Destroy()
-    end
 
     local button = {}
     function button:CreateButton(text, textScaled)
@@ -74,3 +71,6 @@ function library:CreateWindow(name)
     return button
 end
 return library
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild(name) then
+    game.Players.LocalPlayer.PlayerGui[name]:Destroy()
+end
