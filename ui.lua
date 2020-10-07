@@ -47,6 +47,8 @@ function library:CreateWindow(name)
     UIGridLayout.Parent = Container
     UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
+    if game.Players.LocalPlayer.PlayerGui:FindFirstChild(name) then
+        game.Players.LocalPlayer.PlayerGui[name]:Destroy()
 
     local button = {}
     function button:CreateButton(text)
