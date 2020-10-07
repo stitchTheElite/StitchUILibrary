@@ -36,7 +36,7 @@ function library:CreateWindow(name) -- library function
     line.BorderSizePixel = 0
     line.Position = UDim2.new(0, 0, 0.151515156, 0)
     line.Size = UDim2.new(0, 292, 0, 2)
-    stitchhub.Name = "stitchhub"
+    stitchhub.Name = name
     stitchhub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     stitchhub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     Main.Name = "Main"
