@@ -6,7 +6,7 @@
 
 local library = {}
 
-library:CreateWindow("ok")
+library:CreateWindow()
 function library:CreateWindow(name)
     local stitchhub = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
