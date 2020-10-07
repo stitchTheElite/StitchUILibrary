@@ -69,11 +69,11 @@ function library:CreateWindow(name)
         TextButton.TextScaled = scaled
     end
     return button
-end
-return library
-local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren()
-for index, destroyIfExist in pairs(destroyIfExist) do
-    if destroyIfExist.Name == name then
-        destroyIfExist:Destroy()
+	local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren()
+	for index, destroyIfExist in pairs(destroyIfExist) do
+    		if destroyIfExist.Name == name then
+        		destroyIfExist:Destroy()
+		end
 	end
 end
+return library
