@@ -63,5 +63,3 @@ function library:CreateWindow(name)
     end
     return button
 end
-
-return library
