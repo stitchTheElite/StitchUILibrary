@@ -56,7 +56,7 @@ function library:CreateWindow(name, draggable) -- library function
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
-        local function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
+        function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
             local dragSpeed = .25
             local dragToggle = nil
             local dragInput = nil
