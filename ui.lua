@@ -52,7 +52,7 @@ function library:CreateWindow(name)
     end
 
     local button = {}
-    function button:CreateButton(text)
+    function button:CreateButton(text, textScaled)
         local TextButton = Instance.new("TextButton")
         TextButton.Parent = Container
         TextButton.BackgroundColor3 = Color3.fromRGB(22, 0, 79)
@@ -63,6 +63,7 @@ function library:CreateWindow(name)
         TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TextButton.TextSize = 12.000
         TextButton.Text = text
+        TextButton.TextScaled = scaled
     end
     return button
 end
