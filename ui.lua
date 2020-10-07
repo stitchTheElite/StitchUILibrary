@@ -56,7 +56,7 @@ function library:CreateWindow(name, dragsmoothness) -- library function
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
-    if dragsmoothness > 0 then
+    if dragsmoothness >= 0.01 then
         local function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
             local dragSpeed = .25
             local dragToggle = nil
