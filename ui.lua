@@ -50,9 +50,9 @@ function library:CreateWindow(name)
     UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
-    UICorner.CornerRadius = UDim.new(6)
+    UICorner.CornerRadius = UDim.new(0, 6)
     UICorner2.Parent = TextButton
-    UICorner2.CornerRadius = UDim.new(6)
+    UICorner2.CornerRadius = UDim.new(0, 6)
     if game.Players.LocalPlayer.PlayerGui:FindFirstChild(name) then
         game.Players.LocalPlayer.PlayerGui[name]:Destroy()
     end
