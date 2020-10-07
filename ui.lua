@@ -54,6 +54,9 @@ function library:CreateWindow(name)
     local button = {}
     function button:CreateButton(text, textScaled)
         local TextButton = Instance.new("TextButton")
+        local UICorner2 = Instance.new("UICorner")
+        UICorner2.Parent = TextButton
+        UICorner2.CornerRadius = UDim.new(0, 6)
         TextButton.Parent = Container
         TextButton.BackgroundColor3 = Color3.fromRGB(22, 0, 79)
         TextButton.BorderSizePixel = 0
@@ -64,13 +67,13 @@ function library:CreateWindow(name)
         TextButton.TextSize = 12.000
         TextButton.Text = text
         TextButton.TextScaled = scaled
-        local UICorner2 = Instance.new("UICorner")
-        UICorner2.Parent = TextButton
-        UICorner2.CornerRadius = UDim.new(0, 6)
     end
     return button
 end
 return library
-if game.Players.LocalPlayer.PlayerGui:FindFirstChild(name) then
-    game.Players.LocalPlayer.PlayerGui[name]:Destroy()
+local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren()
+for index, destroyIfExist in pairs(destroyIfExist) do
+    if destroyIfExist.Name == name then
+        destroyIfExist:Destroy()
+	end
 end
