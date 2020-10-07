@@ -49,6 +49,7 @@ function library:CreateWindow(name)
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     if game.Players.LocalPlayer.PlayerGui:FindFirstChild(name) then
         game.Players.LocalPlayer.PlayerGui[name]:Destroy()
+    end
 
     local button = {}
     function button:CreateButton(text)
