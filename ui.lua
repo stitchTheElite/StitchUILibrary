@@ -3,10 +3,16 @@
 -- Discord: https://discord.gg/Wxz8FZ2
 
 
+local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren() -- check if ui is already loaded, if it is then it deletes the old one
+for index, destroyIfExist in pairs(destroyIfExist) do
+    if destroyIfExist.Name == name then
+        destroyIfExist:Destroy()
+	end
+end
 
-local library = {}
+local library = {} -- library
 
-function library:CreateWindow(name)
+function library:CreateWindow(name) -- library function
     local stitchhub = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local Container = Instance.new("Frame")
@@ -51,8 +57,8 @@ function library:CreateWindow(name)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
 
-    local button = {}
-    function button:CreateButton(text, textScaled)
+    local button = {} -- button
+    function button:CreateButton(text, textScaled) -- button function
         local TextButton = Instance.new("TextButton")
         local UICorner2 = Instance.new("UICorner")
         UICorner2.Parent = TextButton
