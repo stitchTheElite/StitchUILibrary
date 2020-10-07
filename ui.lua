@@ -6,7 +6,7 @@
 
 local library = {} -- library
 
-function library:CreateWindow(name, dragsmoothness) -- library function
+function library:CreateWindow(name, draggable) -- library function
     local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren() -- check if ui is already loaded, if it is then it deletes the old one
     for index, destroyIfExist in pairs(destroyIfExist) do
     if destroyIfExist.Name == name then
@@ -56,7 +56,7 @@ function library:CreateWindow(name, dragsmoothness) -- library function
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
-    if dragsmoothness >= 0.01 then
+    if draggable == true then
         local function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
             local dragSpeed = .25
             local dragToggle = nil
@@ -90,7 +90,7 @@ function library:CreateWindow(name, dragsmoothness) -- library function
                 end
             end)
         end
-        dragify(game.Players.LocalPlayer.PlayerGui[name])
+        dragify(game.Players.LocalPlayer.PlayerGui[name].Main)
 
     local button = {} -- button
     function button:CreateButton(text, textScaled) -- button function
