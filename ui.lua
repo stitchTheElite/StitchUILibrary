@@ -94,7 +94,8 @@ function library:CreateWindow(name, draggable) -- library function
         end
 
     local button = {} -- button
-    function button:CreateButton(text, textScaled) -- button function
+    function button:CreateButton(text, textScaled, callback) -- button function
+        local callback = callback or function() end
         local TextButton = Instance.new("TextButton")
         local UICorner2 = Instance.new("UICorner")
         UICorner2.Parent = TextButton
@@ -109,6 +110,9 @@ function library:CreateWindow(name, draggable) -- library function
         TextButton.TextSize = 12.000
         TextButton.Text = text
         TextButton.TextScaled = textScaled
+        TextButton.MouseButton1Down:Connect(function()
+            pcall(callback)
+        end)
     end
     return button
 end
