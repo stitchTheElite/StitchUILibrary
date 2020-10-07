@@ -90,6 +90,7 @@ function library:CreateWindow(name, draggable) -- library function
                 end
             end)
         end
+        return dragify
         dragify(game.Players.LocalPlayer.PlayerGui[name].Main)
 
     local button = {} -- button
