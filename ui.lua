@@ -50,6 +50,12 @@ function library:CreateWindow(name)
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
+	local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren()
+	for index, destroyIfExist in pairs(destroyIfExist) do
+    		if destroyIfExist.Name == name then
+        		destroyIfExist:Destroy()
+		end
+	end
 
     local button = {}
     function button:CreateButton(text, textScaled)
@@ -66,14 +72,8 @@ function library:CreateWindow(name)
         TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TextButton.TextSize = 12.000
         TextButton.Text = text
-        TextButton.TextScaled = scaled
+        TextButton.TextScaled = textScaled
     end
     return button
-	local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren()
-	for index, destroyIfExist in pairs(destroyIfExist) do
-    		if destroyIfExist.Name == name then
-        		destroyIfExist:Destroy()
-		end
-	end
 end
 return library
