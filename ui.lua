@@ -6,7 +6,7 @@
 
 local library = {} -- library
 
-function library:CreateWindow(name) -- library function
+function library:CreateWindow(name, dragsmoothness) -- library function
     local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren() -- check if ui is already loaded, if it is then it deletes the old one
     for index, destroyIfExist in pairs(destroyIfExist) do
     if destroyIfExist.Name == name then
@@ -56,6 +56,41 @@ function library:CreateWindow(name) -- library function
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
     UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
+    if dragsmoothness > 0 then
+        local function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
+            local dragSpeed = .25
+            local dragToggle = nil
+            local dragInput = nil
+            local dragStart = nil
+            function updateInput(input)
+                local Delta = input.Position - dragStart
+                local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+                game:GetService("TweenService"):Create(Frame, TweenInfo.new(.25), {Position = Position}):Play()
+            end
+            Frame.InputBegan:Connect(function(input)
+                if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+                    dragToggle = true
+                    dragStart = input.Position
+                    startPos = Frame.Position
+                    input.Changed:Connect(function()
+                        if (input.UserInputState == Enum.UserInputState.End) then
+                            dragToggle = false
+                        end
+                    end)
+                end
+            end)
+            Frame.InputChanged:Connect(function(input)
+                if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+                    dragInput = input
+                end
+            end)
+            game:GetService("UserInputService").InputChanged:Connect(function(input)
+                if (input == dragInput and dragToggle) then
+                    updateInput(input)
+                end
+            end)
+        end
+        dragify(game.Players.LocalPlayer.PlayerGui[name])
 
     local button = {} -- button
     function button:CreateButton(text, textScaled) -- button function
