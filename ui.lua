@@ -26,7 +26,7 @@ function library:CreateWindow(name, draggable) -- library function
     local UICorner_ = Instance.new("UICorner")
     local Circle = Instance.new("ImageLabel")
     Circle.Name = "Circle"
-    Circle.Parent = game.StarterGui.stitchhub.Main.Container.TextButton.RippleEffect
+    Circle.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.Container.TextButton.RippleEffect
     Circle.AnchorPoint = Vector2.new(0.5, 0.5)
     Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Circle.BackgroundTransparency = 1.000
