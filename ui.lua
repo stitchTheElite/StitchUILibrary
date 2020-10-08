@@ -139,90 +139,96 @@ function library:CreateWindow(name, draggable) -- library function
         TextButton.TextSize = 12.000
         TextButton.Text = text
         TextButton.TextScaled = textScaled
-        local function AKAZMP_fake_script() -- TextButton.RippleEffect 
-	local script = Instance.new('LocalScript', TextButton)
-	local RippleColor        = Color3.fromRGB(0, 255, 0)
-	local RippleTransparency = 0.8
-	local PixelSize          = 2000
-	local TimeLength         = 0.9
-	local FadeLength         = 0.6	
-	local frame = script.Parent
-	local rgb = Color3.fromRGB
-	local ud2 = UDim2.new
-	repeat
-		wait()
-	until game.Players.LocalPlayer
-	local plr = game.Players.LocalPlayer
-	local mouse = plr:GetMouse()
-	
-	frame.ClipsDescendants = true
-	frame.AutoButtonColor = false
-	
-	
-	function tweenInRipple(ripple)
-		spawn(function()
-			local TweenService = game:GetService("TweenService")
-			local Part = ripple
-			local Info = TweenInfo.new(
-				TimeLength,
-				Enum.EasingStyle.Linear,
-				Enum.EasingDirection.InOut,
-				0,
-				false,
-				0
-			)
-			local Goals = 
-			{
-				Size = ud2(0, PixelSize, 0, PixelSize);
-			}
-			local Tween = TweenService:Create(Part, Info, Goals)
-			Tween:Play()
-		end)
-	end
-	
-	function fadeOutRipple(ripple)
-		spawn(function()
-			local TweenService = game:GetService("TweenService")
-			local Part = ripple
-			local Info = TweenInfo.new(
-				FadeLength,
-				Enum.EasingStyle.Linear,
-				Enum.EasingDirection.InOut,
-				0,
-				false,
-				0
-			)
-			local Goals = 
-			{
-				ImageTransparency = 1;
-			}
-			local Tween = TweenService:Create(Part, Info, Goals)
-			Tween:Play()
-			wait(FadeLength + 0.1)
-			ripple:Destroy()
-		end)
-	end
-	
-	frame.MouseButton1Down:Connect(function()
-		local done = false
-		local ripple = script.Circle:Clone()
-		ripple.Parent = frame
-		ripple.ZIndex = frame.ZIndex + 1
-		ripple.ImageColor3 = RippleColor
-		ripple.ImageTransparency = RippleTransparency
-		tweenInRipple(ripple)
-		frame.MouseButton1Up:Connect(function()
-			if done == false then
-				done = true
-				fadeOutRipple(ripple)
-			end
-		end)
-		wait(4);
-		done = true;
-		fadeOutRipple(ripple)
-	end)
-end
-coroutine.wrap(AKAZMP_fake_script)()
+        local RippleColor        = Color3.fromRGB(0, 0, 0)
+        local RippleTransparency = 0.8
+        local PixelSize          = 2000
+        local TimeLength         = 0.9
+        local FadeLength         = 0.6
+        local frame = TextButton
+        local rgb = Color3.fromRGB
+        local ud2 = UDim2.new
+        local Circle = Instance.new("ImageLabel")
+        Circle.Name = "Circle"
+        Circle.Parent = TextButton
+        Circle.AnchorPoint = Vector2.new(0.5, 0.5)
+        Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Circle.BackgroundTransparency = 1.000
+        Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Circle.ZIndex = 10
+        Circle.Image = "rbxassetid://266543268"
+        Circle.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Circle.ImageTransparency = 0.500
+        repeat
+            wait()
+        until game.Players.LocalPlayer
+        local plr = game.Players.LocalPlayer
+        local mouse = plr:GetMouse()
+
+        frame.ClipsDescendants = true
+        frame.AutoButtonColor = false
+
+
+        function tweenInRipple(ripple)
+            spawn(function()
+                local TweenService = game:GetService("TweenService")
+                local Part = ripple
+                local Info = TweenInfo.new(
+                    TimeLength,
+                    Enum.EasingStyle.Linear,
+                    Enum.EasingDirection.InOut,
+                    0,
+                    false,
+                    0
+                )
+                local Goals = 
+                {
+                    Size = ud2(0, PixelSize, 0, PixelSize);
+                }
+                local Tween = TweenService:Create(Part, Info, Goals)
+                Tween:Play()
+            end)
+        end
+
+        function fadeOutRipple(ripple)
+            spawn(function()
+                local TweenService = game:GetService("TweenService")
+                local Part = ripple
+                local Info = TweenInfo.new(
+                    FadeLength,
+                    Enum.EasingStyle.Linear,
+                    Enum.EasingDirection.InOut,
+                    0,
+                    false,
+                    0
+                )
+                local Goals = 
+                {
+                    ImageTransparency = 1;
+                }
+                local Tween = TweenService:Create(Part, Info, Goals)
+                Tween:Play()
+                wait(FadeLength + 0.1)
+                ripple:Destroy()
+            end)
+        end
+
+        frame.MouseButton1Down:Connect(function()
+            local done = false
+            local ripple = [TextButton]Circle:Clone()
+            ripple.Parent = frame
+            ripple.ZIndex = frame.ZIndex + 1
+            ripple.ImageColor3 = RippleColor
+            ripple.ImageTransparency = RippleTransparency
+            tweenInRipple(ripple)
+            frame.MouseButton1Up:Connect(function()
+                if done == false then
+                    done = true
+                    fadeOutRipple(ripple)
+                end
+            end)
+            wait(4);
+            done = true;
+            fadeOutRipple(ripple)
             pcall(callback)
         end)
     end
