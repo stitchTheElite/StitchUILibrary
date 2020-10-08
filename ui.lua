@@ -62,7 +62,7 @@ function library:CreateWindow(name, draggable) -- library function
     UIGridLayout.Parent = Container
     UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
-    UICorner.Parent = Main
+    UICorner.Parent = game.Players.LocalPlayer.PlayerGui[name].Main
     UICorner.CornerRadius = UDim.new(0, 6)
     bottomPart.Name = "bottomPart"
     bottomPart.Parent = Main
