@@ -214,7 +214,7 @@ function library:CreateWindow(name, draggable) -- library function
 
         TextButton.MouseButton1Down:Connect(function()
             local done = false
-            local ripple = [TextButton]Circle:Clone()
+            local ripple = TextButton.Circle:Clone()
             ripple.Parent = TextButton
             ripple.ZIndex = TextButton.ZIndex + 1
             ripple.ImageColor3 = RippleColor
