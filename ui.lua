@@ -141,77 +141,11 @@ function library:CreateWindow(name, draggable) -- library function
         TextButton.TextScaled = textScaled
         local function AKAZMP_fake_script() -- TextButton.RippleEffect 
 	local script = Instance.new('LocalScript', TextButton)
-
-	-- NOTE: Make sure the ZIndex of the button used is higher than other GUI parts behind
-	--       it, or this will not work correctly!
-	
-	
-	
-	
-	local RippleColor        = Color3.fromRGB(0, 0, 0) -- RGB Color of the ripple effect, you can change it.
-	local RippleTransparency = 0.8 ---------------------------- Max is 1, Min is 0
-	local PixelSize          = 2000 --------------------------- The Max size of the ripple in pixels
-	local TimeLength         = 0.9 ---------------------------- How long the ripple animation is
-	local FadeLength         = 0.6 ---------------------------- How long it takes for the ripple to fade out
-	
-	
-	
-	-- Do NOT change anything in the script if you want it to work, unless you know how to script...
-	
-	
-	
-	-- Script Below
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	local RippleColor        = Color3.fromRGB(0, 255, 0)
+	local RippleTransparency = 0.8
+	local PixelSize          = 2000
+	local TimeLength         = 0.9
+	local FadeLength         = 0.6	
 	local frame = script.Parent
 	local rgb = Color3.fromRGB
 	local ud2 = UDim2.new
@@ -285,7 +219,7 @@ function library:CreateWindow(name, draggable) -- library function
 		end)
 		wait(4);
 		done = true;
-		fadeOutRipple(ripple) -- if it doesnt detect that it was unselected
+		fadeOutRipple(ripple)
 	end)
 end
 coroutine.wrap(AKAZMP_fake_script)()
