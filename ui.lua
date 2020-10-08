@@ -83,7 +83,7 @@ function library:CreateWindow(name, draggable) -- library function
     OpenClose.TextScaled = true
     OpenClose.TextSize = 14.000
     OpenClose.TextWrapped = true
-    UICorner_.Parent = bottomPart
+    UICorner_.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.bottomPart
     UICorner_.CornerRadius = UDim.new(0, 20)
         function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
             local dragSpeed = .25
