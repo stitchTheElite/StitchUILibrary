@@ -144,12 +144,12 @@ function library:CreateWindow(name, draggable) -- library function
         local PixelSize          = 2000
         local TimeLength         = 0.9
         local FadeLength         = 0.6
-        local frame = game.Players.LocalPlayer.PlayerGui[name].Main.Container.TextButton
+        local frame = TextButton
         local rgb = Color3.fromRGB
         local ud2 = UDim2.new
         local Circle = Instance.new("ImageLabel")
         Circle.Name = "Circle"
-        Circle.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.Container.TextButton
+        Circle.Parent = TextButton
         Circle.AnchorPoint = Vector2.new(0.5, 0.5)
         Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Circle.BackgroundTransparency = 1.000
@@ -214,7 +214,7 @@ function library:CreateWindow(name, draggable) -- library function
 
         frame.MouseButton1Down:Connect(function()
             local done = false
-            local ripple = game.Players.LocalPlayer.PlayerGui[name].Main.Container.TextButton.Circle:Clone()
+            local ripple = [TextButton]Circle:Clone()
             ripple.Parent = frame
             ripple.ZIndex = frame.ZIndex + 1
             ripple.ImageColor3 = RippleColor
