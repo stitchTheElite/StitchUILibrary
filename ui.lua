@@ -229,8 +229,6 @@ function library:CreateWindow(name, draggable) -- library function
             wait(4);
             done = true;
             fadeOutRipple(ripple)
-        end)
-        TextButton.MouseButton1Down:Connect(function()
             pcall(callback)
         end)
     end
