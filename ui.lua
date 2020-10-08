@@ -164,8 +164,8 @@ function library:CreateWindow(name, draggable) -- library function
         local plr = game.Players.LocalPlayer
         local mouse = plr:GetMouse()
 
-        frame.ClipsDescendants = true
-        frame.AutoButtonColor = false
+        TextButton.ClipsDescendants = true
+        TextButton.AutoButtonColor = false
 
 
         function tweenInRipple(ripple)
@@ -212,15 +212,15 @@ function library:CreateWindow(name, draggable) -- library function
             end)
         end
 
-        frame.MouseButton1Down:Connect(function()
+        TextButton.MouseButton1Down:Connect(function()
             local done = false
             local ripple = [TextButton]Circle:Clone()
-            ripple.Parent = frame
-            ripple.ZIndex = frame.ZIndex + 1
+            ripple.Parent = TextButton
+            ripple.ZIndex = TextButton.ZIndex + 1
             ripple.ImageColor3 = RippleColor
             ripple.ImageTransparency = RippleTransparency
             tweenInRipple(ripple)
-            frame.MouseButton1Up:Connect(function()
+            TextButton.MouseButton1Up:Connect(function()
                 if done == false then
                     done = true
                     fadeOutRipple(ripple)
