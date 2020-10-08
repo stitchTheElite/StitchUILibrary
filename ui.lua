@@ -23,6 +23,8 @@ function library:CreateWindow(name, draggable) -- library function
     local bottomPart = Instance.new("Frame")
     local OpenClose = Instance.new("TextButton")
     local Top = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local UICorner2 = Instance.new("UICorner")
     TextLabel.Parent = Main
     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TextLabel.BackgroundTransparency = 1.000
