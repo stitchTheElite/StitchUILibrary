@@ -213,6 +213,7 @@ function library:CreateWindow(name, draggable) -- library function
         end
 
         TextButton.MouseButton1Down:Connect(function()
+            pcall(callback)
             local done = false
             local ripple = TextButton.Circle:Clone()
             ripple.Parent = TextButton
@@ -229,7 +230,6 @@ function library:CreateWindow(name, draggable) -- library function
             wait(4);
             done = true;
             fadeOutRipple(ripple)
-            pcall(callback)
         end)
     end
     return button
