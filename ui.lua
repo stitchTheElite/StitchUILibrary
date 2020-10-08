@@ -228,7 +228,7 @@ function library:CreateWindow(name, draggable) -- library function
             end)
             wait(4);
             done = true;
-            fadeOutRipple(ripple) -- if it doesnt detect that it was unselected
+            fadeOutRipple(ripple)
         end)
         TextButton.MouseButton1Down:Connect(function()
             pcall(callback)
