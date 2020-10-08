@@ -24,17 +24,6 @@ function library:CreateWindow(name, draggable) -- library function
     local OpenClose = Instance.new("TextButton")
     local UICorner = Instance.new("UICorner")
     local UICorner_ = Instance.new("UICorner")
-    local Circle = Instance.new("ImageLabel")
-    Circle.Name = "Circle"
-    Circle.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.Container.TextButton.RippleEffect
-    Circle.AnchorPoint = Vector2.new(0.5, 0.5)
-    Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Circle.BackgroundTransparency = 1.000
-    Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
-    Circle.ZIndex = 10
-    Circle.Image = "rbxassetid://266543268"
-    Circle.ImageColor3 = Color3.fromRGB(0, 0, 0)
-    Circle.ImageTransparency = 0.500
     TextLabel.Parent = Main
     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TextLabel.BackgroundTransparency = 1.000
@@ -158,6 +147,17 @@ function library:CreateWindow(name, draggable) -- library function
         local frame = TextButton
         local rgb = Color3.fromRGB
         local ud2 = UDim2.new
+        local Circle = Instance.new("ImageLabel")
+        Circle.Name = "Circle"
+        Circle.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.Container.TextButton.RippleEffect
+        Circle.AnchorPoint = Vector2.new(0.5, 0.5)
+        Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Circle.BackgroundTransparency = 1.000
+        Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Circle.ZIndex = 10
+        Circle.Image = "rbxassetid://266543268"
+        Circle.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Circle.ImageTransparency = 0.500
         repeat
             wait()
         until game.Players.LocalPlayer
