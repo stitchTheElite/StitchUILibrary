@@ -24,7 +24,7 @@ function library:CreateWindow(name, draggable) -- library function
     local OpenClose = Instance.new("TextButton")
     local UICorner = Instance.new("UICorner")
     local UICorner_ = Instance.new("UICorner")
-    local Circle = Instance.new("ImageLabel")'
+    local Circle = Instance.new("ImageLabel")
     Circle.Name = "Circle"
     Circle.Parent = game.StarterGui.stitchhub.Main.Container.TextButton.RippleEffect
     Circle.AnchorPoint = Vector2.new(0.5, 0.5)
