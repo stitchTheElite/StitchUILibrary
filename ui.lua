@@ -22,7 +22,6 @@ function library:CreateWindow(name, draggable) -- library function
     local TextLabel = Instance.new("TextLabel")
     local bottomPart = Instance.new("Frame")
     local OpenClose = Instance.new("TextButton")
-    local Top = Instance.new("Frame")
     local UICorner = Instance.new("UICorner")
     TextLabel.Parent = Main
     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -83,12 +82,6 @@ function library:CreateWindow(name, draggable) -- library function
     OpenClose.TextScaled = true
     OpenClose.TextSize = 14.000
     OpenClose.TextWrapped = true
-    Top.Name = "Top"
-    Top.Parent = stitchhub
-    Top.BackgroundColor3 = Color3.fromRGB(20, 0, 65)
-    Top.BorderSizePixel = 0
-    Top.Position = UDim2.new(0.355855852, 0, 0.263157904, 0)
-    Top.Size = UDim2.new(0, 292, 0, 23)
         function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
             local dragSpeed = .25
             local dragToggle = nil
