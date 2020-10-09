@@ -232,7 +232,7 @@ function library:CreateWindow(name, draggable) -- library function
             done = true;
             fadeOutRipple(ripple)
         end)
-    function button:CreateToggle(text, callback)
+    function button:CreateToggle(text, textScaled, callback)
         local actions = {}
         local toggled = false
         text = text or "New Toggle"
@@ -240,29 +240,38 @@ function library:CreateWindow(name, draggable) -- library function
         local TextButton = Instance.new("TextButton")
         local Background = Instance.new("Frame")
         local Frame = Instance.new("Frame")
+        local UICorner3 = Instance.new("UICorner")
+        local UICorner4 = Instance.new("UICorner")
         TextButton.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.Container
         TextButton.BackgroundColor3 = Color3.fromRGB(22, 0, 79)
         TextButton.BorderSizePixel = 0
         TextButton.Position = UDim2.new(0.306528509, 0, 0.284653276, 0)
-        TextButton.Size = UDim2.new(0, 126, 0, 50)
+        TextButton.Size = UDim2.new(0, 66, 0, 40)
         TextButton.ZIndex = 15
         TextButton.AutoButtonColor = false
         TextButton.Font = Enum.Font.GothamSemibold
         TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TextButton.TextSize = 14.000
+        if textScaled == true then
+            TextButton.TextScaled = true
+        end
+        UICorner3.Parent = TextButton
+        UICorner3.CornerRadius = UDim.new(0, 6)
         Background.Name = "Background"
         Background.Parent = TextButton
         Background.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
         Background.BorderColor3 = Color3.fromRGB(170, 0, 0)
         Background.BorderSizePixel = 0
-        Background.Position = UDim2.new(0.300000012, 0, 0.699999988, 0)
+        Background.Position = UDim2.new(0, 11, 0.699999988, 0)
         Background.Size = UDim2.new(0, 10, 0, 10)
         Background.ZIndex = 2
+        UICorner4.Parent = Background
+        UICorner4.CornerRadius = UDim.new(0, 8)
         Frame.Parent = TextButton
         Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Frame.BorderSizePixel = 0
-        Frame.Position = UDim2.new(0.307936639, 0, 0.77403903, 0)
-        Frame.Size = UDim2.new(0, 48, 0, 2)
+        Frame.Position = UDim2.new(0, 11, 0.800000012, 0)
+        Frame.Size = UDim2.new(0, 45, 0, 2)
         local function Fire()
             enabled = not enabled
             pcall(callback, enabled)
@@ -270,8 +279,9 @@ function library:CreateWindow(name, draggable) -- library function
         TextButton.MouseButton1Down:Connect(function()
             local var = Background
             if var.BackgroundColor3 == Color3.fromRGB(170, 0, 0) then
-                if var.Position == UDim2.new(0.3, 0,0.7, 0) then
-                    var:TweenPosition(UDim2.new(0.633, 0,0.7, 0))
+                if var.Position == UDim2.new(0, 11,0.7, 0) then
+                    Fire()
+                    var:TweenPosition(UDim2.new(0.53, 11,0.7, 0))
                     var.BackgroundColor3 = Color3.fromRGB(150, 20, 0)
                     wait(0.01)
                     var.BackgroundColor3 = Color3.fromRGB(130, 40, 0)
@@ -290,8 +300,9 @@ function library:CreateWindow(name, draggable) -- library function
                     wait(0.01)
                 end
             elseif var.BackgroundColor3 == Color3.fromRGB(0, 170, 0) then
-                if var.Position == UDim2.new(0.633, 0,0.7, 0) then
-                    var:TweenPosition(UDim2.new(0.3, 0,0.7, 0))
+                if var.Position == UDim2.new(0.53, 11,0.7, 0) then
+                    Fire()
+                    var:TweenPosition(UDim2.new(0, 11,0.7, 0))
                     var.BackgroundColor3 = Color3.fromRGB(20,150 ,0)
                     wait(0.01)
                     var.BackgroundColor3 = Color3.fromRGB(40,130 ,0)
@@ -312,6 +323,7 @@ function library:CreateWindow(name, draggable) -- library function
             end
         end)
     end
+end
     return button
 end
 return library
