@@ -295,6 +295,19 @@ function library:CreateWindow(name, draggable) -- library function
             done = true;
             fadeOutRipple(ripple)
         end)
+    function button:CreateLabel(text, textScaled)
+        local Label = Instance.new("TextLabel")
+        Label.Name = "Label"
+        Label.Parent = Container
+        Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Label.BackgroundTransparency = 1.000
+        Label.Size = UDim2.new(0, 200, 0, 50)
+        Label.Font = Enum.Font.GothamSemibold
+        Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Label.TextSize = 14.000
+        Label.Text = text
+        Label.TextScaled = textScaled
+
     function button:CreateToggle(text, textScaled, callback)
         local actions = {}
         local toggled = false
@@ -315,9 +328,9 @@ function library:CreateWindow(name, draggable) -- library function
         TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TextButton.TextSize = 14.000
         TextButton.Text = text
-        if textScaled == true then
-            TextButton.TextScaled = true
-        end
+        TextButton.LineHeight = 2
+        TextButton.TextYAlignment = 0
+        TextButton.TextScaled = textScaled
         UICorner3.Parent = TextButton
         UICorner3.CornerRadius = UDim.new(0, 6)
         Background.Name = "Background"
@@ -335,11 +348,11 @@ function library:CreateWindow(name, draggable) -- library function
         Frame.BorderSizePixel = 0
         Frame.Position = UDim2.new(0, 11, 0.800000012, 0)
         Frame.Size = UDim2.new(0, 45, 0, 2)
-        local function Fire()
-            enabled = not enabled
-            pcall(callback, enabled)
-        end
         TextButton.MouseButton1Down:Connect(function()
+            local function Fire()
+                enabled = not enabled
+                pcall(callback, enabled)
+            end
             local var = Background
             if var.BackgroundColor3 == Color3.fromRGB(170, 0, 0) then
                 if var.Position == UDim2.new(0, 11,0.7, 0) then
@@ -388,5 +401,6 @@ function library:CreateWindow(name, draggable) -- library function
     end
 end
     return button
+end
 end
 return library
