@@ -10,6 +10,7 @@ function library:CreateWindow(name, draggable) -- library function
     local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren() -- check if ui is already loaded, if it is then it deletes the old one
     for index, destroyIfExist in pairs(destroyIfExist) do
     if destroyIfExist.Name == name then
+            print("Destroyed "..tostring(name)..":Already existed")
             destroyIfExist:Destroy()
         end
     end
@@ -230,6 +231,85 @@ function library:CreateWindow(name, draggable) -- library function
             wait(4);
             done = true;
             fadeOutRipple(ripple)
+        end)
+    function button:CreateToggle(text, callback)
+        local actions = {}
+        local toggled = false
+        text = text or "New Toggle"
+        callback = callback or function() end
+        local TextButton = Instance.new("TextButton")
+        local Background = Instance.new("Frame")
+        local Frame = Instance.new("Frame")
+        TextButton.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.Container
+        TextButton.BackgroundColor3 = Color3.fromRGB(22, 0, 79)
+        TextButton.BorderSizePixel = 0
+        TextButton.Position = UDim2.new(0.306528509, 0, 0.284653276, 0)
+        TextButton.Size = UDim2.new(0, 126, 0, 50)
+        TextButton.ZIndex = 15
+        TextButton.AutoButtonColor = false
+        TextButton.Font = Enum.Font.GothamSemibold
+        TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextButton.TextSize = 14.000
+        Background.Name = "Background"
+        Background.Parent = TextButton
+        Background.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+        Background.BorderColor3 = Color3.fromRGB(170, 0, 0)
+        Background.BorderSizePixel = 0
+        Background.Position = UDim2.new(0.300000012, 0, 0.699999988, 0)
+        Background.Size = UDim2.new(0, 10, 0, 10)
+        Background.ZIndex = 2
+        Frame.Parent = TextButton
+        Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Frame.BorderSizePixel = 0
+        Frame.Position = UDim2.new(0.307936639, 0, 0.77403903, 0)
+        Frame.Size = UDim2.new(0, 48, 0, 2)
+        local function Fire()
+            enabled = not enabled
+            pcall(callback, enabled)
+        end
+        TextButton.MouseButton1Down:Connect(function()
+            local var = Background
+            if var.BackgroundColor3 == Color3.fromRGB(170, 0, 0) then
+                if var.Position == UDim2.new(0.3, 0,0.7, 0) then
+                    var:TweenPosition(UDim2.new(0.633, 0,0.7, 0))
+                    var.BackgroundColor3 = Color3.fromRGB(150, 20, 0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(130, 40, 0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(110, 60, 0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(90, 80, 0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(70, 100, 0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(50, 120, 0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(30, 140, 0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+                    wait(0.01)
+                end
+            elseif var.BackgroundColor3 == Color3.fromRGB(0, 170, 0) then
+                if var.Position == UDim2.new(0.633, 0,0.7, 0) then
+                    var:TweenPosition(UDim2.new(0.3, 0,0.7, 0))
+                    var.BackgroundColor3 = Color3.fromRGB(20,150 ,0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(40,130 ,0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(60,110 ,0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(80,90 ,0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(100,70 ,0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(120,50 ,0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(140,30 ,0)
+                    wait(0.01)
+                    var.BackgroundColor3 = Color3.fromRGB(170,0 ,0)
+                    wait(0.01)
+                end
+            end
         end)
     end
     return button
