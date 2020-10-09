@@ -86,6 +86,69 @@ function library:CreateWindow(name, draggable) -- library function
     OpenClose.TextWrapped = true
     UICorner_.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.bottomPart
     UICorner_.CornerRadius = UDim.new(0, 20)
+    OpenClose.MouseButton1Down:Connect(function()
+        if Main.Size == UDim2.new(0, 292,0, 165)then
+            Main:TweenSize(UDim2.new(0, 292,0, 29))
+            bottomPart:TweenPosition(UDim2.new(0.418, 0,0.124, 0))
+            Main.Container.Visible = false
+            if Main.line.BackgroundTransparency == 0 then -- dont ask me why i did it this way i was bored and needed to kill time
+                Main.line.BackgroundTransparency = 0.1
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.2
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.3
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.4
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.5
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.6
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.7
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.8
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.9
+                wait(0.01)
+                Main.line.BackgroundTransparency = 1
+                local x = 270
+                repeat wait(0.01)
+                    x = x - 10
+                    OpenClose.Rotation = x
+                until x == 90
+            end
+        elseif Main.Size == UDim2.new(0, 292,0, 29) then
+            Main:TweenSize(UDim2.new(0, 292,0, 165))
+            bottomPart:TweenPosition(UDim2.new(0.418, 0,0.848, 0))
+            if Main.line.BackgroundTransparency == 1 then
+                Main.line.BackgroundTransparency = 0.9
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.8
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.7
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.6
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.5
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.4
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.3
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.2
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0.1
+                wait(0.01)
+                Main.line.BackgroundTransparency = 0
+                local x = 90
+                repeat wait(0.01)
+                    x = x + 10
+                    OpenClose.Rotation = x
+                until x == 270
+                Main.Container.Visible = true
+            end
+        end
+    end)
         function dragify(Frame) -- drag script, shoutout to HamstaGang for this awesome script: https://v3rmillion.net/member.php?action=profile&uid=334135
             local dragSpeed = .25
             local dragToggle = nil
@@ -235,7 +298,6 @@ function library:CreateWindow(name, draggable) -- library function
     function button:CreateToggle(text, textScaled, callback)
         local actions = {}
         local toggled = false
-        text = text or "New Toggle"
         callback = callback or function() end
         local TextButton = Instance.new("TextButton")
         local Background = Instance.new("Frame")
@@ -252,6 +314,7 @@ function library:CreateWindow(name, draggable) -- library function
         TextButton.Font = Enum.Font.GothamSemibold
         TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         TextButton.TextSize = 14.000
+        TextButton.Text = text
         if textScaled == true then
             TextButton.TextScaled = true
         end
