@@ -7,13 +7,14 @@
 local library = {} -- library
 
 function library:CreateWindow(name, draggable) -- library function
-    local destroyIfExist = game.Players.LocalPlayer.PlayerGui:GetChildren() -- check if ui is already loaded, if it is then it deletes the old one
+    local destroyIfExist = game.CoreGui:GetChildren() -- check if ui is already loaded, if it is then it deletes the old one
     for index, destroyIfExist in pairs(destroyIfExist) do
     if destroyIfExist.Name == name then
             print("Destroyed "..tostring(name)..":Already existed")
             destroyIfExist:Destroy()
         end
     end
+    player = game.Players.LocalPlayer.PlayerGui
     local stitchhub = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local Container = Instance.new("Frame")
@@ -187,6 +188,174 @@ function library:CreateWindow(name, draggable) -- library function
         end
 
     local button = {}
+    function button:CreateDropdown(text, textScaled, list, callback)
+        local Drop = Instance.new("TextButton")
+        local Holder = Instance.new("Frame")
+        local UIListLayout = Instance.new("UIListLayout")
+        local Line = Instance.new("Frame")
+        local start = Instance.new("TextLabel")
+        local UICorner5 = Instance.new("UICorner")
+        Drop.Name = "Drop"
+        Drop.Parent = Container
+        Drop.BackgroundColor3 = Color3.fromRGB(22, 0, 79)
+        Drop.Position = UDim2.new(0.226575807, 0, 0.402476788, 0)
+        Drop.Size = UDim2.new(0, 66, 0, 40)
+        Drop.Font = Enum.Font.GothamSemibold
+        Drop.Text = text
+        Drop.TextScaled = textScaled
+        Drop.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Drop.TextSize = 14.000
+        Holder.Name = "Holder"
+        Holder.Parent = Drop
+        Holder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Holder.BackgroundTransparency = 1.000
+        Holder.BorderSizePixel = 0
+        Holder.Position = UDim2.new(0, -29, 0, 70)
+        Holder.Size = UDim2.new(0, 123, 0, 3)
+        Holder.Visible = false
+        UIListLayout.Parent = Holder
+        Line.Name = "Line"
+        Line.Parent = Drop
+        Line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Line.BorderSizePixel = 0
+        Line.Position = UDim2.new(0, -29, 0, 67)
+        Line.Size = UDim2.new(0, 123, 0, 3)
+        Line.Visible = false
+        start.Name = "start"
+        start.Parent = Drop
+        start.BackgroundColor3 = Color3.fromRGB(20, 0, 65)
+        start.BorderColor3 = Color3.fromRGB(26, 0, 99)
+        start.Position = UDim2.new(-0.439393938, 0, 1.10000002, 0)
+        start.Size = UDim2.new(0, 123, 0, 23)
+        start.Font = Enum.Font.GothamSemibold
+        start.Text = "Selected: None"
+        start.TextColor3 = Color3.fromRGB(255, 255, 255)
+        start.TextScaled = true
+        start.TextSize = 14.000
+        start.TextWrapped = true
+        start.Visible = false
+        UICorner5.Parent = Drop
+        UICorner5.CornerRadius = UDim.new(0, 6)
+        local RippleColor        = Color3.fromRGB(0, 0, 0)
+        local RippleTransparency = 0.8
+        local PixelSize          = 2000
+        local TimeLength         = 0.9
+        local FadeLength         = 0.6
+        local frame = TextButton
+        local rgb = Color3.fromRGB
+        local ud2 = UDim2.new
+        local Circle = Instance.new("ImageLabel")
+        Circle.Name = "Circle"
+        Circle.Parent = TextButton
+        Circle.AnchorPoint = Vector2.new(0.5, 0.5)
+        Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Circle.BackgroundTransparency = 1.000
+        Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Circle.ZIndex = 10
+        Circle.Image = "rbxassetid://266543268"
+        Circle.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Circle.ImageTransparency = 0.500
+        repeat
+            wait()
+        until game.Players.LocalPlayer
+        local plr = game.Players.LocalPlayer
+        local mouse = plr:GetMouse()
+
+        TextButton.ClipsDescendants = true
+        TextButton.AutoButtonColor = false
+
+
+        function tweenInRipple(ripple)
+            spawn(function()
+                local TweenService = game:GetService("TweenService")
+                local Part = ripple
+                local Info = TweenInfo.new(
+                    TimeLength,
+                    Enum.EasingStyle.Linear,
+                    Enum.EasingDirection.InOut,
+                    0,
+                    false,
+                    0
+                )
+                local Goals = 
+                {
+                    Size = ud2(0, PixelSize, 0, PixelSize);
+                }
+                local Tween = TweenService:Create(Part, Info, Goals)
+                Tween:Play()
+            end)
+        end
+
+        function fadeOutRipple(ripple)
+            spawn(function()
+                local TweenService = game:GetService("TweenService")
+                local Part = ripple
+                local Info = TweenInfo.new(
+                    FadeLength,
+                    Enum.EasingStyle.Linear,
+                    Enum.EasingDirection.InOut,
+                    0,
+                    false,
+                    0
+                )
+                local Goals = 
+                {
+                    ImageTransparency = 1;
+                }
+                local Tween = TweenService:Create(Part, Info, Goals)
+                Tween:Play()
+                wait(FadeLength + 0.1)
+                ripple:Destroy()
+            end)
+        end
+
+        Drop.MouseButton1Down:Connect(function()
+            --pcall(callback)
+            local done = false
+            local ripple = TextButton.Circle:Clone()
+            ripple.Parent = TextButton
+            ripple.ZIndex = TextButton.ZIndex + 1
+            ripple.ImageColor3 = RippleColor
+            ripple.ImageTransparency = RippleTransparency
+            tweenInRipple(ripple)
+            TextButton.MouseButton1Up:Connect(function()
+                if done == false then
+                    done = true
+                    fadeOutRipple(ripple)
+                end
+            end)
+            wait();
+            done = true;
+            fadeOutRipple(ripple)
+            if Holder.Visible == false then 
+                Holder.Visible = true
+                Line.Visible = true
+                start.Visible = true
+            else
+                Holder.Visible = false
+                Line.Visible = false
+                start.Visible = false
+            end
+        end)
+
+        for i,v in next, list do
+            local TextButton = Instance.new("TextButton")
+            TextButton.Parent = Holder
+            TextButton.BackgroundColor3 = Color3.fromRGB(20, 0, 65)
+            TextButton.BorderColor3 = Color3.fromRGB(26, 0, 99)
+            TextButton.Size = UDim2.new(0, 123, 0, 27)
+            TextButton.Font = Enum.Font.GothamSemibold
+            TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextButton.TextScaled = true
+            TextButton.TextSize = 14.000
+            TextButton.TextWrapped = true
+            TextButton.Text = v
+            TextButton.MouseButton1Down:Connect(function()
+                start.Text = "Selected: "..v
+                callback(v)
+            end)
+        end
+    end
     function button:CreateButton(text, textScaled, callback) -- button function
         local callback = callback or function() end
         local TextButton = Instance.new("TextButton")
@@ -295,16 +464,29 @@ function library:CreateWindow(name, draggable) -- library function
             done = true;
             fadeOutRipple(ripple)
         end)
+    function button:CreateLabel(text, textScaled)
+        local Label = Instance.new("TextLabel")
+        Label.Name = "Label"
+        Label.Parent = Container
+        Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Label.BackgroundTransparency = 1.000
+        Label.Size = UDim2.new(0, 200, 0, 50)
+        Label.Font = Enum.Font.GothamSemibold
+        Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Label.TextSize = 14.000
+        Label.Text = text
+        Label.TextScaled = textScaled
+    end
     function button:CreateToggle(text, textScaled, callback)
         local actions = {}
-        local toggled = false
         callback = callback or function() end
         local TextButton = Instance.new("TextButton")
         local Background = Instance.new("Frame")
         local Frame = Instance.new("Frame")
         local UICorner3 = Instance.new("UICorner")
         local UICorner4 = Instance.new("UICorner")
-        TextButton.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.Container
+        local toggle = Instance.new("BoolValue")
+        TextButton.Parent = Container
         TextButton.BackgroundColor3 = Color3.fromRGB(22, 0, 79)
         TextButton.BorderSizePixel = 0
         TextButton.Position = UDim2.new(0.306528509, 0, 0.284653276, 0)
@@ -318,32 +500,97 @@ function library:CreateWindow(name, draggable) -- library function
         TextButton.LineHeight = 2
         TextButton.TextYAlignment = 0
         TextButton.TextScaled = textScaled
-        UICorner3.Parent = TextButton
-        UICorner3.CornerRadius = UDim.new(0, 6)
-        Background.Name = "Background"
-        Background.Parent = TextButton
-        Background.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
-        Background.BorderColor3 = Color3.fromRGB(170, 0, 0)
-        Background.BorderSizePixel = 0
-        Background.Position = UDim2.new(0, 11, 0.699999988, 0)
-        Background.Size = UDim2.new(0, 10, 0, 10)
-        Background.ZIndex = 2
-        UICorner4.Parent = Background
-        UICorner4.CornerRadius = UDim.new(0, 8)
-        Frame.Parent = TextButton
-        Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Frame.BorderSizePixel = 0
-        Frame.Position = UDim2.new(0, 11, 0.800000012, 0)
-        Frame.Size = UDim2.new(0, 45, 0, 2)
+        TextButton.Name = text
+        local Circle = Instance.new("ImageLabel")
+        Circle.Name = "Circle"
+        Circle.Parent = TextButton
+        Circle.AnchorPoint = Vector2.new(0.5, 0.5)
+        Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Circle.BackgroundTransparency = 1.000
+        Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Circle.ZIndex = 10
+        Circle.Image = "rbxassetid://266543268"
+        Circle.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Circle.ImageTransparency = 0.500
+        repeat
+            wait()
+        until game.Players.LocalPlayer
+        local plr = game.Players.LocalPlayer
+        local mouse = plr:GetMouse()
+
+        TextButton.ClipsDescendants = true
+        TextButton.AutoButtonColor = false
+
+
+        function tweenInRipple(ripple)
+            spawn(function()
+                local TweenService = game:GetService("TweenService")
+                local Part = ripple
+                local Info = TweenInfo.new(
+                    TimeLength,
+                    Enum.EasingStyle.Linear,
+                    Enum.EasingDirection.InOut,
+                    0,
+                    false,
+                    0
+                )
+                local Goals = 
+                {
+                    Size = ud2(0, PixelSize, 0, PixelSize);
+                }
+                local Tween = TweenService:Create(Part, Info, Goals)
+                Tween:Play()
+            end)
+        end
+
+        function fadeOutRipple(ripple)
+            spawn(function()
+                local TweenService = game:GetService("TweenService")
+                local Part = ripple
+                local Info = TweenInfo.new(
+                    FadeLength,
+                    Enum.EasingStyle.Linear,
+                    Enum.EasingDirection.InOut,
+                    0,
+                    false,
+                    0
+                )
+                local Goals = 
+                {
+                    ImageTransparency = 1;
+                }
+                local Tween = TweenService:Create(Part, Info, Goals)
+                Tween:Play()
+                wait(FadeLength + 0.1)
+                ripple:Destroy()
+            end)
+        end
         TextButton.MouseButton1Down:Connect(function()
-            local function Fire()
-                enabled = not enabled
+            local done = false
+            local ripple = TextButton.Circle:Clone()
+            ripple.Parent = TextButton
+            ripple.ZIndex = TextButton.ZIndex + 1
+            ripple.ImageColor3 = RippleColor
+            ripple.ImageTransparency = RippleTransparency
+            tweenInRipple(ripple)
+            TextButton.MouseButton1Up:Connect(function()
+                if done == false then
+                    done = true
+                    fadeOutRipple(ripple)
+                end
+            end)
+            wait();
+            done = true;
+            fadeOutRipple(ripple)
+            function fire()
+                TextButton.Toggled.Value = not TextButton.Toggled.Value
+                toggled = toggle.Value
                 pcall(callback, enabled)
             end
             local var = Background
             if var.BackgroundColor3 == Color3.fromRGB(170, 0, 0) then
                 if var.Position == UDim2.new(0, 11,0.7, 0) then
-                    Fire()
+                    fire()
                     var:TweenPosition(UDim2.new(0.53, 11,0.7, 0))
                     var.BackgroundColor3 = Color3.fromRGB(150, 20, 0)
                     wait(0.01)
@@ -364,7 +611,7 @@ function library:CreateWindow(name, draggable) -- library function
                 end
             elseif var.BackgroundColor3 == Color3.fromRGB(0, 170, 0) then
                 if var.Position == UDim2.new(0.53, 11,0.7, 0) then
-                    Fire()
+                    fire()
                     var:TweenPosition(UDim2.new(0, 11,0.7, 0))
                     var.BackgroundColor3 = Color3.fromRGB(20,150 ,0)
                     wait(0.01)
@@ -383,11 +630,31 @@ function library:CreateWindow(name, draggable) -- library function
                     var.BackgroundColor3 = Color3.fromRGB(170,0 ,0)
                     wait(0.01)
                 end
-            end
+        end
         end)
+        UICorner3.Parent = TextButton
+        UICorner3.CornerRadius = UDim.new(0, 6)
+        Background.Name = "Background"
+        Background.Parent = TextButton
+        Background.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+        Background.BorderColor3 = Color3.fromRGB(170, 0, 0)
+        Background.BorderSizePixel = 0
+        Background.Position = UDim2.new(0, 11, 0.699999988, 0)
+        Background.Size = UDim2.new(0, 10, 0, 10)
+        Background.ZIndex = 2
+        UICorner4.Parent = Background
+        UICorner4.CornerRadius = UDim.new(0, 8)
+        Frame.Parent = TextButton
+        Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Frame.BorderSizePixel = 0
+        Frame.Position = UDim2.new(0, 11, 0.800000012, 0)
+        Frame.Size = UDim2.new(0, 45, 0, 2)
+        toggle.Parent = TextButton
+        toggle.Name = "Toggled"
+        toggle.Value = false
+stitchhub.Parent = game.CoreGui
     end
 end
-    return button
-end
+return button
 end
 return library
