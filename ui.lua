@@ -186,7 +186,7 @@ function library:CreateWindow(name, draggable) -- library function
             dragify(game.Players.LocalPlayer.PlayerGui[name].Main)
         end
 
-    local button = {} -- button
+    local button = {}
     function button:CreateButton(text, textScaled, callback) -- button function
         local callback = callback or function() end
         local TextButton = Instance.new("TextButton")
@@ -295,19 +295,6 @@ function library:CreateWindow(name, draggable) -- library function
             done = true;
             fadeOutRipple(ripple)
         end)
-    function button:CreateLabel(text, textScaled)
-        local Label = Instance.new("TextLabel")
-        Label.Name = "Label"
-        Label.Parent = Container
-        Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Label.BackgroundTransparency = 1.000
-        Label.Size = UDim2.new(0, 200, 0, 50)
-        Label.Font = Enum.Font.GothamSemibold
-        Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Label.TextSize = 14.000
-        Label.Text = text
-        Label.TextScaled = textScaled
-
     function button:CreateToggle(text, textScaled, callback)
         local actions = {}
         local toggled = false
