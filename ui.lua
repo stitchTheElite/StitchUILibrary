@@ -16,6 +16,7 @@ function library:CreateWindow(name, draggable) -- library function
     end
     player = game.Players.LocalPlayer.PlayerGui
     local stitchhub = Instance.new("ScreenGui")
+    stitchhub.Parent = game.CoreGui
     local Main = Instance.new("Frame")
     local Container = Instance.new("Frame")
     local UIGridLayout = Instance.new("UIGridLayout")
@@ -45,7 +46,6 @@ function library:CreateWindow(name, draggable) -- library function
     line.Position = UDim2.new(0, 0, 0.151515156, 0)
     line.Size = UDim2.new(0, 292, 0, 2)
     stitchhub.Name = name
-    stitchhub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     stitchhub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     Main.Name = "Main"
     Main.Parent = stitchhub
@@ -64,7 +64,7 @@ function library:CreateWindow(name, draggable) -- library function
     UIGridLayout.Parent = Container
     UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIGridLayout.CellSize = UDim2.new(0, 66, 0, 40)
-    UICorner.Parent = game.Players.LocalPlayer.PlayerGui[name].Main
+    UICorner.Parent = Main
     UICorner.CornerRadius = UDim.new(0, 6)
     bottomPart.Name = "bottomPart"
     bottomPart.Parent = Main
@@ -85,7 +85,7 @@ function library:CreateWindow(name, draggable) -- library function
     OpenClose.TextScaled = true
     OpenClose.TextSize = 14.000
     OpenClose.TextWrapped = true
-    UICorner_.Parent = game.Players.LocalPlayer.PlayerGui[name].Main.bottomPart
+    UICorner_.Parent = game.CoreGui[name].Main.bottomPart
     UICorner_.CornerRadius = UDim.new(0, 20)
     OpenClose.MouseButton1Down:Connect(function()
         if Main.Size == UDim2.new(0, 292,0, 165)then
@@ -184,7 +184,7 @@ function library:CreateWindow(name, draggable) -- library function
             end)
         end
         if draggable == true then
-            dragify(game.Players.LocalPlayer.PlayerGui[name].Main)
+            dragify(game.CoreGui[name].Main)
         end
 
     local button = {}
@@ -652,7 +652,6 @@ function library:CreateWindow(name, draggable) -- library function
         toggle.Parent = TextButton
         toggle.Name = "Toggled"
         toggle.Value = false
-stitchhub.Parent = game.CoreGui
     end
 end
 return button
